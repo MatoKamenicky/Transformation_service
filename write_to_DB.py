@@ -37,8 +37,7 @@ output = [45,55,67]
 
 write2db(input,output)
 
-
-
+#Hanickin komentarik
 
 
 
