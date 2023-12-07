@@ -1,1 +1,1 @@
-# web GIS project
+# Web GIS project
