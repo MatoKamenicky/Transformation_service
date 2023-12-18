@@ -5,6 +5,7 @@
 
 
 import pyproj
+import write_to_DB
 
 def transform_coordinates(x, y, z, from_epsg, to_epsg):
     # Create a transformer from the source CRS to the target CRS
@@ -12,9 +13,12 @@ def transform_coordinates(x, y, z, from_epsg, to_epsg):
 
     # Transform the coordinates
     lon, lat, height = transformer.transform(x, y, z)
-
+    write_to_DB.write2db(lon,lat)
+    
     return lon, lat, height
 
+
+"""
 # Example coordinates in EPSG 5514 with height
 x_5514, y_5514, z_5514 = 123456, 789012, 100  # Example height in meters
 
@@ -27,7 +31,7 @@ lon_4326, lat_4326, height_4326 = transform_coordinates(x_5514, y_5514, z_5514, 
 print(f'Original coordinates (EPSG 5514): {x_5514}, {y_5514}, {z_5514}')
 print(f'Transformed coordinates (EPSG 4326): {lon_4326}, {lat_4326}, {height_4326}')
 
-
+"""
 # In[ ]:
 
 
