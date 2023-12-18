@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Script Result</title>
+</head>
 <body>
-
-<h1>Hello World!</h1>
-<p>Welcome to transform service web project!</p>
-
+    <h1>Script Result</h1>
+    <p>{{ result }}</p>
+    <form action="{% url 'web_transform' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Run Script</button>
+    </form>
 </body>
 </html>
