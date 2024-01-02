@@ -1,11 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
 
 import pyproj
-import write_to_DB
+from . import write_to_DB
+#import write_to_DB
 
 def transform_coordinates(x, y, z, from_epsg, to_epsg):
     # Create a transformer from the source CRS to the target CRS

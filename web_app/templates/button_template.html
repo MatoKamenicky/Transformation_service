@@ -1,0 +1,15 @@
+<!-- web_app/templates/button_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transformation service</title>
+</head>
+<body>
+    <h1>Transformation service</h1>
+    <p>Click the button to execute the script:</p>
+    <form action="{% url 'web_transform' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Transformation service</button>
+    </form>
+</body>
+</html>
