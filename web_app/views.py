@@ -21,3 +21,6 @@ def web_transform(request):
     to_epsg   = 4326
     result = ts.transform_coordinates(x, y, z, from_epsg, to_epsg)
     return render(request, 'button_template.html', {'result': result})
+
+def custom_404(request, exception):
+    return render(request, 'C:/GAK/_ING_studium/ING_3_sem/web_gis/TransformacnaSluzba/web_app/templates/404.html', status=404)

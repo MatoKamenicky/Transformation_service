@@ -28,7 +28,6 @@ print(f'Original coordinates (EPSG 5514): {x_5514}, {y_5514}, {z_5514}')
 print(f'Transformed coordinates (EPSG 4326): {lon_4326}, {lat_4326}, {height_4326}')
 
 """
-# In[ ]:
 
 
 
