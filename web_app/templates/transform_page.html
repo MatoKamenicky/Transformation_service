@@ -1,0 +1,15 @@
+<!-- transformapp/templates/transformapp/transform_page.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transformation Service</title>
+</head>
+<body>
+    <h1>Transformation Service</h1>
+    <form method="post" action="{% url 'web_transform' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Transform</button>
+    </form>
+</body>
+</html>

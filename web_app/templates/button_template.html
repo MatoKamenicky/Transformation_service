@@ -9,7 +9,11 @@
     <p>Click the button to execute the script:</p>
     <form action="{% url 'web_transform' %}" method="post">
         {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit">Transformation service</button>
     </form>
+    {% if result %}
+        <p>Transformation Result: {{ result }}</p>
+    {% endif %}
 </body>
 </html>
