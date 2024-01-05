@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.template import loader
 from . import Transformation_service as ts
-#from .forms import CoordinateForm
 from .forms import CoordinateForm
+from .models import Coordinate
 
 """
 def web_transform(request):
@@ -26,11 +25,16 @@ def web_transform(request):
             from_epsg = 5514
             to_epsg   = 4326
             result = ts.transform_coordinates(x, y, z, from_epsg, to_epsg)
-            print(result)
+            Coordinate.objects.create(x_coordinate=x, y_coordinate=y, result_x=result[0], result_y=result[1], result_z=result[2])
+            return redirect('result')
     else:
         form = CoordinateForm()
     return render(request, 'button_template.html', {'form': form})
 
+def result(request):
+    latest_calculation = Coordinate.objects.last()
+    result_string = f"{latest_calculation.result_x} {latest_calculation.result_y} {latest_calculation.result_z}"
+    return render(request, 'result.html', {'result_string': result_string})
 
 def custom_404(request, exception):
     return render(request, 'C:/GAK/_ING_studium/ING_3_sem/web_gis/TransformacnaSluzba/web_app/templates/404.html', status=404)

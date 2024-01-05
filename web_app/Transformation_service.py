@@ -9,7 +9,9 @@ def transform_coordinates(x, y, z, from_epsg, to_epsg):
 
     # Transform the coordinates
     lon, lat, height = transformer.transform(x, y, z)
-    write_to_DB.write2db(lon,lat)
+    input = [x,y,z]
+    output = [lon,lat,height]
+    write_to_DB.write2db(input,output)
     
     return lon, lat, height
 
