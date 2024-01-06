@@ -1,6 +1,4 @@
-import geopandas as gpd
 import psycopg2
-from sqlalchemy import create_engine
 
 def write2db(input,output):
     try:
@@ -30,11 +28,4 @@ def write2db(input,output):
             connection.close()
             print("PostgreSQL connection is closed")
 
-"""
-#Sample input and output
-input = [56,21,37]
-output = [45,55,67]
-
-write2db(input,output)
-"""
 

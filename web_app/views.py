@@ -1,20 +1,12 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from . import Transformation_service as ts
 from .forms import CoordinateForm
 from .models import Coordinate
 
-"""
-def web_transform(request):
-    x, y, z = 123456, 789012, 100  # Example height in meters
+def home(request):
+    return render(request, 'home.html')
 
-    from_epsg = 5514
-    to_epsg   = 4326
-    result = ts.transform_coordinates(x, y, z, from_epsg, to_epsg)
-    return render(request, 'button_template.html', {'result': result})
-"""
-
-def web_transform(request):
+def transform_xy(request):
     if request.method == 'POST':
         form = CoordinateForm(request.POST)
         if form.is_valid():
@@ -29,7 +21,27 @@ def web_transform(request):
             return redirect('result')
     else:
         form = CoordinateForm()
-    return render(request, 'button_template.html', {'form': form})
+    return render(request, 'transform_xy.html', {'form': form})
+
+def transform_xyz(request):
+    if request.method == 'POST':
+        form = CoordinateForm(request.POST)
+        if form.is_valid():
+            x = int(form.cleaned_data['x_coordinate'])
+            y = int(form.cleaned_data['y_coordinate'])
+            z = int(form.cleaned_data['z_coordinate'])
+
+            from_epsg = 5514
+            to_epsg   = 4326
+            result = ts.transform_coordinates(x, y, z, from_epsg, to_epsg)
+            Coordinate.objects.create(x_coordinate=x, y_coordinate=y, result_x=result[0], result_y=result[1], result_z=result[2])
+            return redirect('result')
+    else:
+        form = CoordinateForm()
+    return render(request, 'transform_xyz.html', {'form': form})
+
+def about_us(request):
+    return render(request, 'about_us.html')
 
 def result(request):
     latest_calculation = Coordinate.objects.last()
