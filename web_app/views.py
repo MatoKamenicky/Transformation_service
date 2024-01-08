@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from . import Transformation_service as ts
-from .forms import CoordinateForm
+from .forms import CoordinateForm_xy, CoordinateForm_xyz
 from .models import Coordinate
 
 def home(request):
@@ -8,7 +8,7 @@ def home(request):
 
 def transform_xy(request):
     if request.method == 'POST':
-        form = CoordinateForm(request.POST)
+        form = CoordinateForm_xy(request.POST)
         if form.is_valid():
             x = int(form.cleaned_data['x_coordinate'])
             y = int(form.cleaned_data['y_coordinate'])
@@ -20,12 +20,12 @@ def transform_xy(request):
             Coordinate.objects.create(x_coordinate=x, y_coordinate=y, result_x=result[0], result_y=result[1], result_z=result[2])
             return redirect('result')
     else:
-        form = CoordinateForm()
+        form = CoordinateForm_xy()
     return render(request, 'transform_xy.html', {'form': form})
 
 def transform_xyz(request):
     if request.method == 'POST':
-        form = CoordinateForm(request.POST)
+        form = CoordinateForm_xyz(request.POST)
         if form.is_valid():
             x = int(form.cleaned_data['x_coordinate'])
             y = int(form.cleaned_data['y_coordinate'])
@@ -37,7 +37,7 @@ def transform_xyz(request):
             Coordinate.objects.create(x_coordinate=x, y_coordinate=y, result_x=result[0], result_y=result[1], result_z=result[2])
             return redirect('result')
     else:
-        form = CoordinateForm()
+        form = CoordinateForm_xyz()
     return render(request, 'transform_xyz.html', {'form': form})
 
 def about_us(request):
