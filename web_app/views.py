@@ -12,12 +12,9 @@ def transform_xy(request):
         if form.is_valid():
             x = int(form.cleaned_data['x_coordinate'])
             y = int(form.cleaned_data['y_coordinate'])
-            z = 100
 
-            from_epsg = 5514
-            to_epsg   = 4326
-            result = ts.transform_coordinates(x, y, z, from_epsg, to_epsg)
-            Coordinate.objects.create(x_coordinate=x, y_coordinate=y, result_x=result[0], result_y=result[1], result_z=result[2])
+            result = ts.transform_coordinates_2D(x, y)
+            Coordinate.objects.create(x_coordinate=x, y_coordinate=y, result_x=result[0], result_y=result[1])
             return redirect('result')
     else:
         form = CoordinateForm_xy()
@@ -31,9 +28,7 @@ def transform_xyz(request):
             y = int(form.cleaned_data['y_coordinate'])
             z = int(form.cleaned_data['z_coordinate'])
 
-            from_epsg = 5514
-            to_epsg   = 4326
-            result = ts.transform_coordinates(x, y, z, from_epsg, to_epsg)
+            result = ts.transform_coordinates_3D(x, y, z)
             Coordinate.objects.create(x_coordinate=x, y_coordinate=y, result_x=result[0], result_y=result[1], result_z=result[2])
             return redirect('result')
     else:
