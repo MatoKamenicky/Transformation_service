@@ -14,7 +14,7 @@ def transform_xy(request):
             y = int(form.cleaned_data['y_coordinate'])
 
             result = ts.transform_coordinates_2D(x, y)
-            Coordinate.objects.create(x_coordinate=x, y_coordinate=y, result_x=result[0], result_y=result[1])
+            Coordinate.objects.create(x_coordinate=x, y_coordinate=y, z_coordinate=None, result_x=result[0], result_y=result[1], result_z=None)
             return redirect('result')
     else:
         form = CoordinateForm_xy()

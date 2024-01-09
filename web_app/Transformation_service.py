@@ -1,5 +1,5 @@
 import pyproj
-#from . import write_to_DB
+from . import write_to_DB
 #import write_to_DB
 
 def transform_coordinates_2D(x, y):
@@ -10,9 +10,9 @@ def transform_coordinates_2D(x, y):
 
     # Transform the coordinates
     lon, lat = transformer.transform(x, y)
-    input = [x,y]
-    output = [lon,lat]
-    #write_to_DB.write2db(input,output)
+    input = [x,y,None]
+    output = [lon,lat,None]
+    write_to_DB.write2db(input,output)
     
     return lon, lat
 
@@ -28,7 +28,7 @@ def transform_coordinates_3D(x, y, z):
     h = 100
     input = [x,y,z]
     output = [lon,lat,h]
-    #write_to_DB.write2db(input,output)
+    write_to_DB.write2db(input,output)
     
     return lon, lat, h
 
